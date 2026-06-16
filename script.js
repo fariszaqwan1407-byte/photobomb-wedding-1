@@ -1,8 +1,8 @@
 let stream;
 let imageData;
-let currentFacing="user";
+let currentFacing = "user";
 
-// FLOWERS
+/* 🌸 FLOWERS EFFECT */
 function spawnFlowers(){
 for(let i=0;i<18;i++){
 let f=document.createElement("div");
@@ -15,7 +15,7 @@ document.body.appendChild(f);
 }
 spawnFlowers();
 
-// START CAMERA
+/* 💎 START CAMERA */
 function startCamera(){
 document.getElementById("welcome").classList.remove("active");
 document.getElementById("cameraScreen").classList.add("active");
@@ -35,12 +35,37 @@ document.getElementById("camera").srcObject=s;
 });
 }
 
+/* 🔁 SWITCH CAMERA */
 function switchCamera(){
-currentFacing=currentFacing==="user"?"environment":"user";
+currentFacing = currentFacing === "user" ? "environment" : "user";
 openCamera(currentFacing);
 }
 
-// CAPTURE + FRAME
+/* 💎 AI BEAUTY FILTER */
+function applyBeautyFilter(ctx, w, h){
+
+let imageData = ctx.getImageData(0,0,w,h);
+let data = imageData.data;
+
+for(let i=0;i<data.length;i+=4){
+
+// brightness + soft skin
+data[i] = data[i] * 1.08 + 10;     // R
+data[i+1] = data[i+1] * 1.05 + 10; // G
+data[i+2] = data[i+2] * 1.05 + 10; // B
+
+}
+
+ctx.putImageData(imageData,0,0);
+
+// soft glow overlay
+ctx.globalAlpha = 0.08;
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0,0,w,h);
+ctx.globalAlpha = 1;
+}
+
+/* 📸 CAPTURE + FRAME + BEAUTY */
 function capture(){
 
 let video=document.getElementById("camera");
@@ -53,12 +78,16 @@ let ctx=canvas.getContext("2d");
 
 ctx.drawImage(video,0,0);
 
+// 💎 APPLY BEAUTY
+applyBeautyFilter(ctx, canvas.width, canvas.height);
+
+// INPUT
 let nama=document.getElementById("nama").value||"";
 let ucapan=document.getElementById("ucapan").value||"";
 
 let h=canvas.height;
 
-// FRAME GRADIENT
+/* 🌸 FRAME */
 let gradient=ctx.createLinearGradient(0,h-300,0,h);
 gradient.addColorStop(0,"transparent");
 gradient.addColorStop(1,"rgba(0,0,0,0.75)");
@@ -66,7 +95,7 @@ gradient.addColorStop(1,"rgba(0,0,0,0.75)");
 ctx.fillStyle=gradient;
 ctx.fillRect(0,h-300,canvas.width,300);
 
-// TEXT STYLE
+/* TEXT */
 ctx.fillStyle="white";
 ctx.textAlign="center";
 
@@ -84,8 +113,8 @@ ctx.font="22px sans-serif";
 let shortText = ucapan.length>50 ? ucapan.substring(0,50)+"..." : ucapan;
 ctx.fillText(shortText,canvas.width/2,h-45);
 
-// IMAGE
-imageData=canvas.toDataURL("image/jpeg",0.92);
+/* SAVE IMAGE */
+imageData = canvas.toDataURL("image/jpeg",0.92);
 
 document.getElementById("preview").src=imageData;
 
@@ -93,15 +122,15 @@ document.getElementById("cameraScreen").classList.remove("active");
 document.getElementById("previewScreen").classList.add("active");
 }
 
-// DOWNLOAD
+/* 📥 DOWNLOAD */
 function downloadImage(){
 let a=document.createElement("a");
 a.href=imageData;
-a.download="wedding-photo.jpg";
+a.download="Faris-Shafiqah-Photobooth.jpg";
 a.click();
 }
 
-// UPLOAD
+/* ☁️ UPLOAD */
 function upload(){
 
 document.getElementById("loading").style.display="flex";
