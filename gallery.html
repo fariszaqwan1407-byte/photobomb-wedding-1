@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Gallery</title>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+background:#111;
+color:white;
+}
+
+h1{
+text-align:center;
+padding:20px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:10px;
+}
+
+img{
+width:100%;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>FARIS ❤️ SHAFIQAH GALLERY</h1>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+
+const folderId="1rx4hXXtkNG6go8pBgi8Ez029eAKMRAMG";
+
+// GOOGLE DRIVE PUBLIC IMAGE FORMAT
+const images=[
+  // nanti kita auto load manual simple version
+];
+
+// SIMPLE VERSION: manual embed
+// (next upgrade kita buat auto API)
+
+document.getElementById("gallery").innerHTML=`
+<p style="text-align:center">Buka folder Drive untuk lihat semua gambar</p>
+<p style="text-align:center">Next upgrade kita buat auto live feed 🔥</p>
+`;
+
+</script>
+
+</body>
+</html>
