@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>Faris ❤️ Shafiqah Photobooth</title>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+background:#0f0f0f;
+overflow:hidden;
+}
+
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+box-sizing:border-box;
+}
+
+.active{display:flex;}
+
+#camera{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.btn{
+background:#d88ea0;
+color:white;
+padding:15px;
+border:none;
+border-radius:12px;
+width:90%;
+font-size:16px;
+margin-top:10px;
+}
+
+.input{
+width:90%;
+padding:12px;
+margin:8px;
+border-radius:10px;
+border:none;
+}
+
+.card{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:20px;
+border-radius:20px;
+width:90%;
+}
+
+h1,h2,p{color:white;margin:5px;}
+
+canvas{display:none;}
+img{width:100%;border-radius:15px;margin-top:10px;}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="welcome">
+<h1>FARIS ❤️ SHAFIQAH</h1>
+<p>Wedding Photobooth</p>
+<button class="btn" onclick="startCamera()">MULA</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="cameraScreen">
+<video id="camera" autoplay playsinline></video>
+<button class="btn" onclick="capture()">AMBIL GAMBAR</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="previewScreen">
+<div class="card">
+<img id="preview">
+<input id="nama" class="input" placeholder="Nama anda">
+<textarea id="ucapan" class="input" placeholder="Ucapan..." rows="4"></textarea>
+<button class="btn" onclick="upload()">HANTAR</button>
+</div>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="done">
+<h2>❤️ TERIMA KASIH</h2>
+<p>Gambar anda telah disimpan</p>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<script src="script.js"></script>
+
+</body>
+</html>
